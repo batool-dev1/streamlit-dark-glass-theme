@@ -1,5 +1,7 @@
 # ✨ Nebula AI Analytics — Streamlit Dark Glassmorphism Theme
-🚀 Live Demo: Check out the live app here
+
+🚀 **Live Demo:** [Check out the live app here](https://app-dark-glass-theme-ddmbgr6oknvnagfjopfmh4.streamlit.app/)
+
 A production-ready, ultra-modern **Dark Glassmorphism UI theme and analytics template** built for Python [Streamlit](https://streamlit.io/). 
 
 Designed specifically to solve the "ugly default Streamlit UI" problem. Perfect for AI founders, data scientists, and developers who want their Python prototypes or AI wrappers to look like a million-dollar SaaS product.
@@ -12,11 +14,11 @@ Designed specifically to solve the "ugly default Streamlit UI" problem. Perfect 
 
 ## 🚀 Key Features
 
-* **Glassmorphism Design System:** Custom CSS injected cleanly via `st.markdown`, featuring frosted glass cards, subtle glowing borders, and animated background orbs.
-* **Centralized Theme Tokens:** Easily reskin the entire application by tweaking a single `THEME` dictionary.
-* **Restyled Components:** Custom KPI metric cards with directional badges, glowing action buttons, restyled sidebar, tabs, and inputs.
-* **Plotly Integration:** Out-of-the-box custom dark-themed Plotly charts that seamlessly match the UI.
-* **Zero External Dependencies (Demo Data):** Powered by synthetic deterministic data so the app runs instantly out of the box.
+- **Glassmorphism Design System:** Custom CSS injected cleanly via `st.markdown`, featuring frosted glass cards, subtle glowing borders, and animated background orbs.
+- **Centralized Theme Tokens:** Easily reskin the entire application by tweaking a single `THEME` dictionary.
+- **Restyled Components:** Custom KPI metric cards with directional badges, glowing action buttons, restyled sidebar, tabs, and inputs.
+- **Plotly Integration:** Out-of-the-box custom dark-themed Plotly charts that seamlessly match the UI.
+- **Zero External Dependencies (Demo Data):** Powered by synthetic deterministic data so the app runs instantly out of the box.
 
 ---
 
