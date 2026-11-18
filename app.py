@@ -1,13 +1,13 @@
 """
-Nebula AI Analytics — Streamlit Dark Glassmorphism Theme Template
-=================================================================
+Nebula AI Analytics — Streamlit Clean Light Glassmorphism Theme Template
+=====================================================================
 
 A production-style dashboard template featuring:
-  • Dark-mode glassmorphism design system (CSS injected via st.markdown)
-  • Glass cards, gradient-styled KPI metrics, and glowing buttons
-  • Sidebar navigation, tabbed analytics panels, and an AI insight feed
-  • Plotly charts restyled to match the theme
-  • Synthetic demo data so the app runs with zero external dependencies
+- Clean light-mode glassmorphism design system (CSS injected via st.markdown)
+- Frosted white glass cards, soft shadows, and clean typography
+- Sidebar navigation, tabbed analytics panels, and an AI insight feed
+- Plotly charts restyled to match the light theme
+- Synthetic demo data so the app runs with zero external dependencies
 
 Run with:
     pip install streamlit plotly numpy pandas
@@ -22,7 +22,6 @@ import streamlit as st
 # ---------------------------------------------------------------------------
 # 1. PAGE CONFIGURATION
 # ---------------------------------------------------------------------------
-# Must be the first Streamlit command executed in the script.
 st.set_page_config(
     page_title="Nebula AI Analytics",
     page_icon="✨",
@@ -31,30 +30,28 @@ st.set_page_config(
 )
 
 # ---------------------------------------------------------------------------
-# 2. THEME TOKENS
+# 2. THEME TOKENS (Clean Light Theme)
 # ---------------------------------------------------------------------------
-# Central place to tweak the palette. The CSS below reads these values, so
-# changing a token here updates the whole theme consistently.
 THEME = {
-    "bg_primary": "#070A13",
-    "bg_secondary": "#0D1224",
-    "glass_fill": "rgba(255, 255, 255, 0.05)",
-    "glass_border": "rgba(255, 255, 255, 0.12)",
-    "text_primary": "#E8ECFF",
-    "text_muted": "#8A93B8",
-    "accent_1": "#7C5CFF",   # violet
-    "accent_2": "#00D4FF",   # cyan
-    "accent_3": "#FF4FD8",   # magenta
-    "success": "#2EE6A6",
-    "danger": "#FF5C7A",
+    "bg_primary": "#F4F6FB",
+    "bg_secondary": "#FFFFFF",
+    "glass_fill": "rgba(255, 255, 255, 0.78)",
+    "glass_border": "rgba(15, 23, 42, 0.08)",
+    "text_primary": "#0F172A",
+    "text_muted": "#64748B",
+    "accent_1": "#6366F1",   # Indigo
+    "accent_2": "#0EA5E9",   # Sky Blue
+    "accent_3": "#EC4899",   # Pink
+    "success": "#10B981",    # Emerald
+    "danger": "#F43F5E",     # Rose
 }
 
 
 # ---------------------------------------------------------------------------
-# 3. CUSTOM CSS (glassmorphism + dark mode)
+# 3. CUSTOM CSS (Light glassmorphism)
 # ---------------------------------------------------------------------------
 def inject_custom_css() -> None:
-    """Inject the full theme stylesheet into the Streamlit page."""
+    """Inject the full light theme stylesheet into the Streamlit page."""
     css = f"""
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
@@ -65,17 +62,17 @@ def inject_custom_css() -> None:
         color: {THEME['text_primary']};
     }}
 
-    /* Animated gradient background with soft glowing orbs */
+    /* Light animated gradient background */
     .stApp {{
         background:
-            radial-gradient(circle at 12% 18%, rgba(124, 92, 255, 0.22) 0%, transparent 35%),
-            radial-gradient(circle at 88% 12%, rgba(0, 212, 255, 0.16) 0%, transparent 32%),
-            radial-gradient(circle at 60% 92%, rgba(255, 79, 216, 0.14) 0%, transparent 38%),
+            radial-gradient(circle at 12% 18%, rgba(99, 102, 241, 0.12) 0%, transparent 40%),
+            radial-gradient(circle at 88% 12%, rgba(14, 165, 233, 0.12) 0%, transparent 38%),
+            radial-gradient(circle at 60% 92%, rgba(236, 72, 153, 0.08) 0%, transparent 42%),
             linear-gradient(160deg, {THEME['bg_primary']} 0%, {THEME['bg_secondary']} 100%);
         background-attachment: fixed;
     }}
 
-    /* Hide Streamlit chrome for a cleaner product look */
+    /* Hide Streamlit chrome */
     #MainMenu, footer, header {{ visibility: hidden; }}
     .block-container {{
         padding-top: 2rem;
@@ -85,9 +82,9 @@ def inject_custom_css() -> None:
 
     /* ---------- Sidebar ---------- */
     section[data-testid="stSidebar"] {{
-        background: rgba(10, 14, 28, 0.65) !important;
-        backdrop-filter: blur(18px) saturate(140%);
-        -webkit-backdrop-filter: blur(18px) saturate(140%);
+        background: rgba(255, 255, 255, 0.8) !important;
+        backdrop-filter: blur(20px) saturate(160%);
+        -webkit-backdrop-filter: blur(20px) saturate(160%);
         border-right: 1px solid {THEME['glass_border']};
     }}
     section[data-testid="stSidebar"] * {{ color: {THEME['text_primary']}; }}
@@ -97,7 +94,7 @@ def inject_custom_css() -> None:
         font-size: 2.6rem;
         font-weight: 800;
         letter-spacing: -0.02em;
-        background: linear-gradient(90deg, {THEME['accent_2']}, {THEME['accent_1']}, {THEME['accent_3']});
+        background: linear-gradient(90deg, {THEME['accent_1']}, {THEME['accent_2']}, {THEME['accent_3']});
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin-bottom: 0.2rem;
@@ -114,14 +111,15 @@ def inject_custom_css() -> None:
         display: flex;
         align-items: center;
         gap: 0.5rem;
+        color: {THEME['text_primary']};
     }}
     .section-title::before {{
         content: "";
         width: 6px;
         height: 18px;
         border-radius: 4px;
-        background: linear-gradient(180deg, {THEME['accent_2']}, {THEME['accent_1']});
-        box-shadow: 0 0 12px {THEME['accent_2']};
+        background: linear-gradient(180deg, {THEME['accent_1']}, {THEME['accent_2']});
+        box-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
     }}
 
     /* ---------- Glass card (reusable) ---------- */
@@ -132,13 +130,13 @@ def inject_custom_css() -> None:
         padding: 1.4rem 1.5rem;
         backdrop-filter: blur(16px) saturate(160%);
         -webkit-backdrop-filter: blur(16px) saturate(160%);
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+        box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.9);
         transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
     }}
     .glass-card:hover {{
         transform: translateY(-3px);
-        border-color: rgba(124, 92, 255, 0.45);
-        box-shadow: 0 14px 40px rgba(124, 92, 255, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+        border-color: rgba(99, 102, 241, 0.35);
+        box-shadow: 0 16px 36px rgba(99, 102, 241, 0.12), inset 0 1px 0 rgba(255, 255, 255, 1);
     }}
 
     /* ---------- Styled KPI metric cards ---------- */
@@ -155,7 +153,7 @@ def inject_custom_css() -> None:
         height: 140px;
         border-radius: 50%;
         background: radial-gradient(circle, var(--glow, {THEME['accent_1']}) 0%, transparent 70%);
-        opacity: 0.35;
+        opacity: 0.15;
         pointer-events: none;
     }}
     .kpi-label {{
@@ -170,6 +168,7 @@ def inject_custom_css() -> None:
         font-weight: 800;
         margin: 0.35rem 0 0.25rem 0;
         letter-spacing: -0.02em;
+        color: {THEME['text_primary']};
     }}
     .kpi-delta {{
         font-size: 0.85rem;
@@ -181,17 +180,17 @@ def inject_custom_css() -> None:
         border-radius: 999px;
     }}
     .kpi-delta.up {{
-        color: {THEME['success']};
-        background: rgba(46, 230, 166, 0.12);
-        border: 1px solid rgba(46, 230, 166, 0.3);
+        color: #047857;
+        background: rgba(16, 185, 129, 0.12);
+        border: 1px solid rgba(16, 185, 129, 0.25);
     }}
     .kpi-delta.down {{
-        color: {THEME['danger']};
-        background: rgba(255, 92, 122, 0.12);
-        border: 1px solid rgba(255, 92, 122, 0.3);
+        color: #BE123C;
+        background: rgba(244, 63, 94, 0.12);
+        border: 1px solid rgba(244, 63, 94, 0.25);
     }}
 
-    /* Native st.metric also restyled for consistency */
+    /* Native st.metric restyled */
     div[data-testid="stMetric"] {{
         background: {THEME['glass_fill']};
         border: 1px solid {THEME['glass_border']};
@@ -199,6 +198,7 @@ def inject_custom_css() -> None:
         padding: 1rem 1.2rem;
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
+        box-shadow: 0 4px 20px rgba(15, 23, 42, 0.03);
     }}
     div[data-testid="stMetricValue"] {{
         font-weight: 800;
@@ -221,28 +221,21 @@ def inject_custom_css() -> None:
         padding: 0.65rem 1.4rem;
         font-weight: 700;
         letter-spacing: 0.02em;
-        box-shadow: 0 0 18px rgba(124, 92, 255, 0.45), 0 0 40px rgba(0, 212, 255, 0.18);
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
         transition: all 0.25s ease;
     }}
     div.stButton > button:hover,
     div.stDownloadButton > button:hover {{
         transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 0 26px rgba(124, 92, 255, 0.75), 0 0 60px rgba(0, 212, 255, 0.35);
+        box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
         color: #ffffff;
     }}
     div.stButton > button:active {{ transform: scale(0.98); }}
 
-    /* Secondary (ghost) glass button variant */
-    .ghost-btn button {{
-        background: {THEME['glass_fill']} !important;
-        border: 1px solid {THEME['glass_border']} !important;
-        box-shadow: none !important;
-    }}
-
     /* ---------- Tabs ---------- */
     div[data-baseweb="tab-list"] {{
         gap: 0.5rem;
-        background: {THEME['glass_fill']};
+        background: rgba(255, 255, 255, 0.6);
         border: 1px solid {THEME['glass_border']};
         border-radius: 14px;
         padding: 0.35rem;
@@ -257,8 +250,8 @@ def inject_custom_css() -> None:
     }}
     button[data-baseweb="tab"][aria-selected="true"] {{
         color: {THEME['text_primary']} !important;
-        background: linear-gradient(135deg, rgba(124,92,255,0.35), rgba(0,212,255,0.25)) !important;
-        box-shadow: 0 0 14px rgba(124, 92, 255, 0.35);
+        background: #ffffff !important;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
     }}
     div[data-baseweb="tab-highlight"], div[data-baseweb="tab-border"] {{ display: none; }}
 
@@ -266,7 +259,7 @@ def inject_custom_css() -> None:
     div[data-baseweb="select"] > div,
     div[data-baseweb="input"] > div,
     .stTextInput input, .stTextArea textarea {{
-        background: rgba(255, 255, 255, 0.04) !important;
+        background: rgba(255, 255, 255, 0.8) !important;
         border: 1px solid {THEME['glass_border']} !important;
         border-radius: 12px !important;
         color: {THEME['text_primary']} !important;
@@ -279,18 +272,18 @@ def inject_custom_css() -> None:
         align-items: flex-start;
         padding: 0.95rem 1rem;
         border-radius: 14px;
-        background: rgba(255, 255, 255, 0.03);
+        background: rgba(255, 255, 255, 0.5);
         border: 1px solid {THEME['glass_border']};
         margin-bottom: 0.7rem;
         transition: background 0.2s ease;
     }}
-    .insight:hover {{ background: rgba(124, 92, 255, 0.08); }}
+    .insight:hover {{ background: rgba(255, 255, 255, 0.9); }}
     .insight-dot {{
         width: 10px; height: 10px; margin-top: 0.4rem; border-radius: 50%;
         flex-shrink: 0;
-        box-shadow: 0 0 10px currentColor;
+        box-shadow: 0 0 8px currentColor;
     }}
-    .insight-title {{ font-weight: 700; font-size: 0.95rem; }}
+    .insight-title {{ font-weight: 700; font-size: 0.95rem; color: {THEME['text_primary']}; }}
     .insight-body {{ color: {THEME['text_muted']}; font-size: 0.88rem; margin-top: 0.15rem; }}
 
     /* ---------- Badges ---------- */
@@ -302,15 +295,15 @@ def inject_custom_css() -> None:
         font-weight: 700;
         letter-spacing: 0.05em;
         text-transform: uppercase;
-        background: rgba(0, 212, 255, 0.12);
-        color: {THEME['accent_2']};
-        border: 1px solid rgba(0, 212, 255, 0.3);
+        background: rgba(99, 102, 241, 0.1);
+        color: {THEME['accent_1']};
+        border: 1px solid rgba(99, 102, 241, 0.2);
     }}
 
     /* ---------- Scrollbar ---------- */
     ::-webkit-scrollbar {{ width: 8px; height: 8px; }}
     ::-webkit-scrollbar-thumb {{
-        background: rgba(124, 92, 255, 0.35);
+        background: rgba(99, 102, 241, 0.25);
         border-radius: 10px;
     }}
     </style>
@@ -322,7 +315,6 @@ def inject_custom_css() -> None:
 # 4. REUSABLE UI COMPONENTS
 # ---------------------------------------------------------------------------
 def kpi_card(label: str, value: str, delta: str, positive: bool, glow: str) -> str:
-    """Return HTML for a glowing KPI card. Render with st.markdown(..., unsafe_allow_html=True)."""
     arrow = "▲" if positive else "▼"
     direction = "up" if positive else "down"
     return f"""
@@ -335,12 +327,10 @@ def kpi_card(label: str, value: str, delta: str, positive: bool, glow: str) -> s
 
 
 def section_title(text: str) -> None:
-    """Render a gradient-accented section heading."""
     st.markdown(f'<div class="section-title">{text}</div>', unsafe_allow_html=True)
 
 
 def insight_item(title: str, body: str, color: str) -> str:
-    """Return HTML for one AI insight row."""
     return f"""
     <div class="insight">
         <div class="insight-dot" style="background:{color}; color:{color};"></div>
@@ -353,7 +343,6 @@ def insight_item(title: str, body: str, color: str) -> str:
 
 
 def styled_plotly(fig: go.Figure, height: int = 360) -> go.Figure:
-    """Apply the dark glass theme to any Plotly figure."""
     fig.update_layout(
         height=height,
         margin=dict(l=10, r=10, t=30, b=10),
@@ -362,22 +351,21 @@ def styled_plotly(fig: go.Figure, height: int = 360) -> go.Figure:
         font=dict(family="Inter, system-ui", color=THEME["text_muted"]),
         legend=dict(bgcolor="rgba(0,0,0,0)", orientation="h", y=1.08, x=0),
         hoverlabel=dict(
-            bgcolor="rgba(13,18,36,0.95)",
+            bgcolor="rgba(255,255,255,0.95)",
             bordercolor=THEME["glass_border"],
             font=dict(color=THEME["text_primary"]),
         ),
     )
     fig.update_xaxes(showgrid=False, zeroline=False, linecolor=THEME["glass_border"])
-    fig.update_yaxes(gridcolor="rgba(255,255,255,0.06)", zeroline=False)
+    fig.update_yaxes(gridcolor="rgba(15,23,42,0.06)", zeroline=False)
     return fig
 
 
 # ---------------------------------------------------------------------------
-# 5. DEMO DATA (synthetic, deterministic for consistent screenshots)
+# 5. DEMO DATA
 # ---------------------------------------------------------------------------
 @st.cache_data
 def generate_demo_data(days: int = 90, seed: int = 42) -> pd.DataFrame:
-    """Create a fake time series of AI platform usage metrics."""
     rng = np.random.default_rng(seed)
     dates = pd.date_range(end=pd.Timestamp.today().normalize(), periods=days, freq="D")
     trend = np.linspace(0, 1, days)
@@ -396,7 +384,6 @@ def generate_demo_data(days: int = 90, seed: int = 42) -> pd.DataFrame:
 
 @st.cache_data
 def generate_model_breakdown() -> pd.DataFrame:
-    """Create a fake breakdown of usage across AI models."""
     return pd.DataFrame({
         "model": ["Nova-Large", "Nova-Mini", "Vision-Pro", "Embed-v3", "Audio-Lite"],
         "share": [38, 27, 18, 11, 6],
@@ -407,7 +394,6 @@ def generate_model_breakdown() -> pd.DataFrame:
 # 6. SIDEBAR
 # ---------------------------------------------------------------------------
 def render_sidebar() -> dict:
-    """Render sidebar controls and return the selected filter values."""
     with st.sidebar:
         st.markdown(
             '<div class="hero-title" style="font-size:1.6rem;">✨ Nebula</div>'
@@ -447,7 +433,6 @@ def render_sidebar() -> dict:
 # 7. PAGES
 # ---------------------------------------------------------------------------
 def render_overview(df: pd.DataFrame) -> None:
-    """Top-level KPIs plus the main usage chart."""
     st.markdown('<div class="hero-title">AI Performance Overview</div>', unsafe_allow_html=True)
     st.markdown(
         '<div class="hero-sub">Real-time health of your AI inference fleet.</div>',
@@ -459,7 +444,6 @@ def render_overview(df: pd.DataFrame) -> None:
     avg_accuracy = df["accuracy"].mean() * 100
     total_cost = df["cost_usd"].sum()
 
-    # KPI row — custom glass cards
     c1, c2, c3, c4 = st.columns(4)
     with c1:
         st.markdown(kpi_card("Total requests", f"{total_requests:,}", "+12.4%", True, THEME["accent_1"]),
@@ -476,7 +460,6 @@ def render_overview(df: pd.DataFrame) -> None:
 
     st.write("")
 
-    # Main chart + native metrics side by side
     left, right = st.columns([2.3, 1])
     with left:
         section_title("Request volume")
@@ -484,7 +467,7 @@ def render_overview(df: pd.DataFrame) -> None:
         fig.add_trace(go.Scatter(
             x=df["date"], y=df["requests"], mode="lines",
             line=dict(color=THEME["accent_2"], width=3, shape="spline"),
-            fill="tozeroy", fillcolor="rgba(0,212,255,0.08)", name="Requests",
+            fill="tozeroy", fillcolor="rgba(14,165,233,0.08)", name="Requests",
             hovertemplate="%{y:,} requests<extra></extra>",
         ))
         fig.add_trace(go.Scatter(
@@ -500,12 +483,11 @@ def render_overview(df: pd.DataFrame) -> None:
         st.metric("Error rate", "0.12%", "-0.04%", delta_color="inverse")
         st.metric("p95 latency", "412 ms", "-18 ms", delta_color="inverse")
 
-    # Secondary chart row
     section_title("Latency & accuracy trend")
     fig2 = go.Figure()
     fig2.add_trace(go.Bar(
         x=df["date"], y=df["latency_ms"], name="Latency (ms)",
-        marker=dict(color="rgba(124,92,255,0.55)", line=dict(width=0)),
+        marker=dict(color="rgba(99,102,241,0.55)", line=dict(width=0)),
     ))
     fig2.add_trace(go.Scatter(
         x=df["date"], y=df["accuracy"] * 100, name="Accuracy (%)", yaxis="y2",
@@ -516,7 +498,6 @@ def render_overview(df: pd.DataFrame) -> None:
 
 
 def render_models(df: pd.DataFrame, breakdown: pd.DataFrame, selected: list) -> None:
-    """Model-level breakdown with a donut chart and action buttons."""
     st.markdown('<div class="hero-title">Model Portfolio</div>', unsafe_allow_html=True)
     st.markdown('<div class="hero-sub">Traffic share and routing across deployed models.</div>',
                 unsafe_allow_html=True)
@@ -529,7 +510,7 @@ def render_models(df: pd.DataFrame, breakdown: pd.DataFrame, selected: list) -> 
         fig = go.Figure(go.Pie(
             labels=filtered["model"], values=filtered["share"], hole=0.68,
             marker=dict(colors=[THEME["accent_1"], THEME["accent_2"], THEME["accent_3"],
-                                THEME["success"], "#FFB86B"],
+                                THEME["success"], "#F59E0B"],
                         line=dict(color=THEME["bg_primary"], width=3)),
             textinfo="none",
         ))
@@ -550,10 +531,10 @@ def render_models(df: pd.DataFrame, breakdown: pd.DataFrame, selected: list) -> 
                     <span class="badge">Healthy</span>
                 </div>
                 <div style="margin-top:0.7rem; height:6px; border-radius:6px;
-                            background:rgba(255,255,255,0.06); overflow:hidden;">
+                            background:rgba(15,23,42,0.06); overflow:hidden;">
                     <div style="width:{row['share']}%; height:100%;
                                 background:linear-gradient(90deg,{THEME['accent_1']},{THEME['accent_2']});
-                                box-shadow:0 0 10px {THEME['accent_2']};"></div>
+                                box-shadow:0 0 8px rgba(99,102,241,0.3);"></div>
                 </div>
             </div>
             """, unsafe_allow_html=True)
@@ -575,7 +556,6 @@ def render_models(df: pd.DataFrame, breakdown: pd.DataFrame, selected: list) -> 
 
 
 def render_insights() -> None:
-    """AI-generated insight feed (static demo copy)."""
     st.markdown('<div class="hero-title">AI Insights</div>', unsafe_allow_html=True)
     st.markdown('<div class="hero-sub">Automatically surfaced anomalies and recommendations.</div>',
                 unsafe_allow_html=True)
@@ -596,7 +576,6 @@ def render_insights() -> None:
 
 
 def render_settings() -> None:
-    """Example form page showing styled inputs."""
     st.markdown('<div class="hero-title">Settings</div>', unsafe_allow_html=True)
     st.markdown('<div class="hero-sub">Configure your workspace and API preferences.</div>',
                 unsafe_allow_html=True)
@@ -614,7 +593,6 @@ def render_settings() -> None:
 # 8. MAIN ENTRY POINT
 # ---------------------------------------------------------------------------
 def main() -> None:
-    """Assemble the page: inject theme, render sidebar, dispatch to the chosen page."""
     inject_custom_css()
     controls = render_sidebar()
 
